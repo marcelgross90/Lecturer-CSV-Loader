@@ -1,213 +1,139 @@
 package models;
 
 /**
- * Created by patrick_laptop on 21.10.16.
+ * Created by patrick_laptop on 22.10.16.
  */
+/*
+ * Copyright (c) peter.braun@fhws.de
+*
+*  Licensed under the Apache License, Version 2.0 (the "License");
+*  you may not use this file except in compliance with the License.
+*  You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+*  Unless required by applicable law or agreed to in writing, software
+*  distributed under the License is distributed on an "AS IS" BASIS,
+*  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*  See the License for the specific language governing permissions and
+*  limitations under the License.
+*/
+/* *****************************************************************************
+  This file was generated as part of the GeMARA project by generator class:
+  de.fhws.applab.gemara.dalston.generator.models.resources.frontend.JavaModelForSingleClientResourceGenerator
+  DON'T EDIT THIS FILE. ALL MODIFICATIONS EXCEPT THOSE MARKED WILL BE OVERWRITTEN.
+***************************************************************************** */
+// ###(imports) You can edit below this line ###
 
-import com.owlike.genson.annotation.JsonConverter;
-import com.owlike.genson.annotation.JsonIgnore;
-//import de.fhws.applab.gemara.models.AbstractModel;
-//import de.fhws.applab.gemara.norbury.core.api.converters.LinkConverter;
-//import org.glassfish.jersey.linking.InjectLink;
+        import com.owlike.genson.annotation.JsonConverter;
+        import com.owlike.genson.annotation.JsonProperty;
+        import de.fhws.applab.gemara.models.AbstractModel;
+        import de.fhws.applab.gemara.shaklewell.ClientLinkConverter;
+        import de.fhws.applab.gemara.shaklewell.Link;
 
-import javax.ws.rs.core.Link;
+// ###(imports) You can edit above this line ###
+public class Lecturer extends AbstractModel
+{
 
-public class Lecturer extends AbstractModel implements Cloneable {
-    protected String firstName;
-
-    protected String lastName;
-
-    protected String title;
-
-    protected String urlWelearn;
-
-    protected String email;
-
-    protected String phone;
-
-    protected String urlProfileImage;
-
-    protected String urlToOriginalProfileImage;
-
-//    @InjectLink(style = InjectLink.Style.ABSOLUTE, value = "mitarbeiter/${instance.id}/rimg", rel = "roundImage")
-    protected Link urlProfileImageRound;
-
-    protected String address;
-
-    protected String roomNumber;
-
-//    @InjectLink(style = InjectLink.Style.ABSOLUTE, value = "mitarbeiter/${instance.id}", rel = "self")
-    private Link selfUri;
-
-    public Lecturer() {
-    }
+    private String firstName;
 
     public String getFirstName() {
         return this.firstName;
     }
 
-    public void setFirstName(final String firstName) {
+    public void setFirstName( String firstName) {
+
         this.firstName = firstName;
     }
+
+    private String lastName;
 
     public String getLastName() {
         return this.lastName;
     }
 
-    public void setLastName(final String lastName) {
+    public void setLastName( String lastName) {
+
         this.lastName = lastName;
     }
 
-    public String getTitle() {
-        return this.title;
-    }
-
-    public void setTitle(final String title) {
-        this.title = title;
-    }
-
-    public String getUrlWelearn() {
-        return this.urlWelearn;
-    }
-
-    public void setUrlWelearn(final String urlWelearn) {
-        this.urlWelearn = urlWelearn;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(final String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return this.phone;
-    }
-
-    public void setPhone(final String phone) {
-        this.phone = phone;
-    }
-
-    public String getUrlProfileImage() {
-        return this.urlProfileImage;
-    }
-
-    public void setUrlProfileImage(final String urlProfileImage) {
-        this.urlProfileImage = urlProfileImage;
-    }
+    private String address;
 
     public String getAddress() {
         return this.address;
     }
 
-    public void setAddress(final String address) {
+    public void setAddress( String address) {
+
         this.address = address;
     }
+
+    private String roomNumber;
 
     public String getRoomNumber() {
         return this.roomNumber;
     }
 
-    public void setRoomNumber(final String roomNumber) {
+    public void setRoomNumber( String roomNumber) {
+
         this.roomNumber = roomNumber;
     }
 
-//    @JsonConverter(LinkConverter.class)
-    public Link getUrlProfileImageRound() {
-        return this.urlProfileImageRound;
+    private String phone;
+
+    public String getPhone() {
+        return this.phone;
     }
 
-    @JsonIgnore
-    public void setUrlProfileImageRound(final Link urlProfileImageRound) {
-        this.urlProfileImageRound = urlProfileImageRound;
+    public void setPhone( String phone) {
+
+        this.phone = phone;
     }
 
-//    @JsonConverter(LinkConverter.class)
-    public Link getSelfUri() {
-        return this.selfUri;
+    private String urlWelearn;
+
+    public String getUrlWelearn() {
+        return this.urlWelearn;
     }
 
-    @JsonIgnore
-    public void setSelfUri(final Link link) {
-        this.selfUri = link;
+    public void setUrlWelearn( String urlWelearn) {
+
+        this.urlWelearn = urlWelearn;
     }
 
-    @JsonIgnore
-    public String getUrlToOriginalProfileImage() {
-        return this.urlToOriginalProfileImage;
+    private Link profileImageUrl;
+    @JsonConverter( ClientLinkConverter.class )
+    public Link getProfileImageUrl() {
+        return this.profileImageUrl;
+    }
+    @JsonConverter( ClientLinkConverter.class )
+    public void setProfileImageUrl( Link profileImageUrl) {
+
+        this.profileImageUrl = profileImageUrl;
     }
 
-    @JsonIgnore
-    public void setUrlToOriginalProfileImage(final String urlToOriginalProfileImage) {
-        this.urlToOriginalProfileImage = urlToOriginalProfileImage;
+    private String title;
+
+    public String getTitle() {
+        return this.title;
     }
 
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
+    public void setTitle( String title) {
 
-        final Lecturer lecturer = (Lecturer) o;
-
-        if (this.firstName != null ? !this.firstName.equals(lecturer.firstName) : lecturer.firstName != null)
-            return false;
-        if (this.lastName != null ? !this.lastName.equals(lecturer.lastName) : lecturer.lastName != null)
-            return false;
-        if (this.title != null ? !this.title.equals(lecturer.title) : lecturer.title != null)
-            return false;
-        if (this.urlWelearn != null ? !this.urlWelearn.equals(lecturer.urlWelearn) : lecturer.urlWelearn != null)
-            return false;
-        if (this.email != null ? !this.email.equals(lecturer.email) : lecturer.email != null)
-            return false;
-        if (this.phone != null ? !this.phone.equals(lecturer.phone) : lecturer.phone != null)
-            return false;
-        if (this.urlProfileImage != null ?
-                !this.urlProfileImage.equals(lecturer.urlProfileImage) :
-                lecturer.urlProfileImage != null)
-            return false;
-        if (this.address != null ? !this.address.equals(lecturer.address) : lecturer.address != null)
-            return false;
-        return !(this.roomNumber != null ?
-                !this.roomNumber.equals(lecturer.roomNumber) :
-                lecturer.roomNumber != null);
-
+        this.title = title;
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    private String email;
+
+    public String getEmail() {
+        return this.email;
     }
 
-    @Override
-    public int hashCode() {
-        int result = this.firstName != null ? this.firstName.hashCode() : 0;
-        result = 31 * result + (this.lastName != null ? this.lastName.hashCode() : 0);
-        result = 31 * result + (this.title != null ? this.title.hashCode() : 0);
-        result = 31 * result + (this.urlWelearn != null ? this.urlWelearn.hashCode() : 0);
-        result = 31 * result + (this.email != null ? this.email.hashCode() : 0);
-        result = 31 * result + (this.phone != null ? this.phone.hashCode() : 0);
-        result = 31 * result + (this.urlProfileImage != null ? this.urlProfileImage.hashCode() : 0);
-        result = 31 * result + (this.address != null ? this.address.hashCode() : 0);
-        result = 31 * result + (this.roomNumber != null ? this.roomNumber.hashCode() : 0);
-        return result;
-    }
+    public void setEmail( String email) {
 
-    @Override
-    public String toString() {
-        return "Lecturer{" +
-                "firstName='" + this.firstName + '\'' +
-                ", lastName='" + this.lastName + '\'' +
-                ", title='" + this.title + '\'' +
-                ", urlWelearn='" + this.urlWelearn + '\'' +
-                ", email='" + this.email + '\'' +
-                ", phone='" + this.phone + '\'' +
-                ", urlProfileImage='" + this.urlProfileImage + '\'' +
-                ", address='" + this.address + '\'' +
-                ", roomNumber='" + this.roomNumber + '\'' +
-                '}';
+        this.email = email;
     }
+    private Link selfUri;
+    @JsonConverter( ClientLinkConverter.class ) @JsonProperty( "self" ) public Link getSelfUri( ) { return selfUri; }
+    @JsonConverter( ClientLinkConverter.class )  @JsonProperty( "self" ) public void setSelfUri( Link link ) { this.selfUri = link; }
 }

@@ -1,5 +1,5 @@
 import csv.LecturerParser;
-import models.Lecturer;
+import models.LecturerViewModel;
 
 import java.util.List;
 
@@ -10,15 +10,15 @@ public class Main
 {
     public static void main( String[] args )
     {
-        List< Lecturer > lecturers = new LecturerParser( ).pathToCsvFileIs( "src/main/resources/lecturers.csv" )
+        List< LecturerViewModel > lecturers = new LecturerParser( ).pathToCsvFileIs( "src/main/resources/lecturers.csv" )
                 .parse( );
 
         printLecturers(lecturers);
     }
 
-    private static void printLecturers( List< Lecturer > lecturers )
+    private static void printLecturers( List< LecturerViewModel > lecturers )
     {
-        for ( Lecturer l : lecturers )
+        for ( LecturerViewModel l : lecturers )
         {
             System.out.println( l.toString( ) );
         }

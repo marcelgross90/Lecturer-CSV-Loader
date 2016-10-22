@@ -1,6 +1,7 @@
 package csv;
 
-import models.Lecturer;
+import de.fhws.applab.gemara.shaklewell.Link;
+import models.LecturerViewModel;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
@@ -16,11 +17,11 @@ public class LecturerParser
 
     private String csvString;
 
-    private List< Lecturer > parsedLecturers;
+    private List< LecturerViewModel > parsedLecturers;
 
     public LecturerParser( )
     {
-        this.parsedLecturers = new LinkedList< Lecturer >( );
+        this.parsedLecturers = new LinkedList< LecturerViewModel >( );
     }
 
     public LecturerParser pathToCsvFileIs( String pathToCsvFile )
@@ -29,7 +30,7 @@ public class LecturerParser
         return this;
     }
 
-    public List< Lecturer > parse( )
+    public List< LecturerViewModel > parse( )
     {
         readCsvFile( );
 
@@ -66,15 +67,15 @@ public class LecturerParser
     {
         for ( CSVRecord record : csvParser )
         {
-            Lecturer lecturer = readLecturer( record );
+            LecturerViewModel lecturer = readLecturer( record );
 
             addLecturerToList( lecturer );
         }
     }
 
-    private Lecturer readLecturer( CSVRecord record )
+    private LecturerViewModel readLecturer( CSVRecord record )
     {
-        Lecturer lecturer = createNewLecturer( );
+        LecturerViewModel lecturer = createNewLecturerViewModel( );
 
         int currentColumn = 0;
 
@@ -85,21 +86,22 @@ public class LecturerParser
         lecturer.setEmail( record.get( currentColumn++ ) );
         lecturer.setPhone( record.get( currentColumn++ ) );
         lecturer.setUrlWelearn( record.get( currentColumn++ ) );
-        lecturer.setUrlProfileImage( record.get( currentColumn++ ) );
+        lecturer.setProfileImageUrl( new Link( record.get( currentColumn++ ), "image/jpeg", "hi" ) );
         lecturer.setPhone( record.get( currentColumn++ ) ); //Phone kommt zweimal in CSV Datei vor!
         lecturer.setAddress( record.get( currentColumn++ ) );
         lecturer.setRoomNumber( record.get( currentColumn++ ) );
-        lecturer.setUrlProfileImage( record.get( currentColumn++ ) ); //TODO roundImage
+        lecturer.setProfileImageUrl( new Link( record.get( currentColumn++ ), "image/jpeg", "hi" ) ); //Link kommt
+        // zweimal in CSV Datei vor!
 
         return lecturer;
     }
 
-    private Lecturer createNewLecturer( )
+    private LecturerViewModel createNewLecturerViewModel( )
     {
-        return new Lecturer( );
+        return new LecturerViewModel( );
     }
 
-    private void addLecturerToList( Lecturer lecturer )
+    private void addLecturerToList( LecturerViewModel lecturer )
     {
         this.parsedLecturers.add( lecturer );
     }
