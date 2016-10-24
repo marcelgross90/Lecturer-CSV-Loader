@@ -1,12 +1,12 @@
 package network;
 
+import com.owlike.genson.Genson;
 import models.LecturerViewModel;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,9 +20,12 @@ public class PostLecturerData
 
     private List< LecturerViewModel > lecturerData;
 
+    private Genson genson;
+
     public PostLecturerData( )
     {
         this.lecturerData = new LinkedList< LecturerViewModel >( );
+        this.genson = new Genson();
     }
 
     public PostLecturerData dataIs( List< LecturerViewModel > lecturerData )
@@ -35,24 +38,35 @@ public class PostLecturerData
     {
         for ( LecturerViewModel lecturer : this.lecturerData )
         {
-            int responseCode = postSingle( lecturer );
+            int responseCode = post( lecturer );
 
             System.out.println( "ResponseCode ist: " + responseCode );
         }
     }
 
-    private int postSingle( LecturerViewModel lecturer )
+    private int post( LecturerViewModel lecturer )
     {
-        final Client client = ClientBuilder.newClient( );
-        final UriBuilder uriBuilder = UriBuilder.fromUri( this.postEndpointUrl );
+        HttpURLConnection connection = null;
+        try {
+            connection =
+                    (HttpURLConnection) new URL( postEndpointUrl ).openConnection();
+            connection.setRequestMethod( "POST" );
+            connection.setRequestProperty( "Content-Type", "application/vnd.fhws-lecturer.default+json" );
+            connection.setDoOutput( true );
 
-        final Response response = client.target( uriBuilder.build( ) )
-                .request( "application/json" )
-                .post( Entity.entity( lecturer, "application/vnd.fhws-lecturer.default+json" ) );
-        //Hier buggt es
+            OutputStreamWriter writer =
+                    new OutputStreamWriter( connection.getOutputStream() );
+            writer.write( genson.serialize(lecturer) );
+            writer.flush();
 
-        final int responseCode = response.getStatus( );
+            return connection.getResponseCode();
 
-        return responseCode;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return 500;
+        } finally {
+            if (connection != null)
+                connection.disconnect();
+        }
     }
 }
