@@ -1,16 +1,15 @@
 package network;
 
 import models.LecturerViewModel;
+import org.apache.commons.io.IOUtils;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,10 +53,7 @@ public class LoadAndPostProfileImage
 			connection.setRequestProperty( "Content-Type", "image/png" );
 			connection.setDoOutput( true );
 
-			OutputStreamWriter writer =
-					new OutputStreamWriter( connection.getOutputStream() );
-			writer.write( new String(readImg(imgName)) );
-			writer.flush();
+			IOUtils.copy(new FileInputStream(new File(imgPath + imgName)), connection.getOutputStream());
 
 			return connection.getResponseCode();
 
@@ -67,16 +63,6 @@ public class LoadAndPostProfileImage
 		} finally {
 			if (connection != null)
 				connection.disconnect();
-		}
-	}
-
-	private byte[] readImg(String imgName)
-	{
-		try {
-			Path path = Paths.get(imgPath + imgName);
-			return Files.readAllBytes(path);
-		} catch (IOException ex) {
-			return null;
 		}
 	}
 
