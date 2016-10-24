@@ -1,5 +1,7 @@
 import csv.LecturerParser;
 import models.LecturerViewModel;
+import network.FetchAllLecturer;
+import network.LoadAndPostProfileImage;
 import network.PostLecturerData;
 
 import java.util.List;
@@ -13,9 +15,14 @@ public class Main
     {
         List< LecturerViewModel > lecturers = parseLecturers( );
 
-        printLecturers( lecturers );
+ //       printLecturers( lecturers );
 
-        postLecturers( lecturers );
+//        postLecturers( lecturers );
+
+        List< LecturerViewModel > postedLectures = getLecturers();
+
+        loadAndPostProfileImage(lecturers, postedLectures);
+
     }
 
     private static List< LecturerViewModel > parseLecturers( )
@@ -35,5 +42,19 @@ public class Main
     private static void postLecturers( List< LecturerViewModel > lecturersToBePosted )
     {
         new PostLecturerData( ).dataIs( lecturersToBePosted ).postData( );
+    }
+
+    private static List<LecturerViewModel> getLecturers()
+    {
+        return new FetchAllLecturer().fetchLecturers();
+    }
+
+    private static void loadAndPostProfileImage(List<LecturerViewModel> readLecturer, List<LecturerViewModel> postedLecturer)
+    {
+        try {
+            new LoadAndPostProfileImage(readLecturer, postedLecturer).execute();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
