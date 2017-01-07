@@ -92,12 +92,12 @@ public class LoadAndPostProfileImage
 		{
 			for (LecturerViewModel postedLecturerCurrent : postedLecturer)
 			{
-				if (readLecturerCurrent.getUrlWelearn().equals(postedLecturerCurrent.getUrlWelearn()))
-				{
-					postedLecturerCurrent.setProfileImageUrl(readLecturerCurrent.getProfileImageUrl());
-					this.mergedLecturers.add(postedLecturerCurrent);
-					break;
-				}
+					if (postedLecturerCurrent.getEmail().equals(readLecturerCurrent.getEmail()))
+					{
+						postedLecturerCurrent.setProfileImageUrl(readLecturerCurrent.getProfileImageUrl());
+						this.mergedLecturers.add(postedLecturerCurrent);
+						break;
+					}
 			}
 		}
 	}

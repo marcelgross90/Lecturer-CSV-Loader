@@ -90,15 +90,19 @@ public class Lecturer extends AbstractModel
         this.phone = phone;
     }
 
-    private String urlWelearn;
+    private Link homepage;
 
-    public String getUrlWelearn() {
-        return this.urlWelearn;
+    public Link getHomepage() {
+        return this.homepage;
     }
 
-    public void setUrlWelearn( String urlWelearn) {
+    public void setHomepage(Link homepage) {
 
-        this.urlWelearn = urlWelearn;
+        this.homepage = homepage;
+    }
+
+    public void setHomepage(String homepageUrl) {
+        this.homepage = new Link(homepageUrl, "text/html", "homepage");
     }
 
     private Link profileImageUrl;

@@ -94,14 +94,18 @@ public class LecturerViewModel extends ViewModel< Lecturer >
         theModel.setPhone( phone );
     }
 
-    public String getUrlWelearn( )
+    public Link getHomepage()
     {
-        return theModel.getUrlWelearn( );
+        return theModel.getHomepage();
     }
 
-    public void setUrlWelearn( String urlWelearn )
+    public void setHomepage(String homepageUrl)
     {
-        theModel.setUrlWelearn( urlWelearn );
+        theModel.setHomepage(homepageUrl);
+    }
+
+    public void setHomepage(Link homepage) {
+        theModel.setHomepage(homepage);
     }
 
     @JsonConverter( ClientLinkConverter.class )
@@ -143,7 +147,7 @@ public class LecturerViewModel extends ViewModel< Lecturer >
                 "firstName='" + this.getFirstName( ) + '\'' +
                 ", lastName='" + this.getLastName( ) + '\'' +
                 ", title='" + this.getTitle( ) + '\'' +
-                ", urlWelearn='" + this.getUrlWelearn( ) + '\'' +
+                ", urlWelearn='" + this.getHomepage() + '\'' +
                 ", email='" + this.getEmail( ) + '\'' +
                 ", phone='" + this.getPhone( ) + '\'' +
                 ", urlProfileImage='" + this.getProfileImageUrl( ) + '\'' +

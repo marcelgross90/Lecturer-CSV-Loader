@@ -85,7 +85,7 @@ public class LecturerParser
         lecturer.setTitle( record.get( currentColumn++ ) );
         lecturer.setEmail( record.get( currentColumn++ ) );
         lecturer.setPhone( record.get( currentColumn++ ) );
-        lecturer.setUrlWelearn( record.get( currentColumn++ ) );
+        lecturer.setHomepage(record.get(currentColumn++));
         lecturer.setProfileImageUrl( new Link( record.get( currentColumn++ ), "image/jpeg", "hi" ) );
         lecturer.setPhone( record.get( currentColumn++ ) ); //Phone kommt zweimal in CSV Datei vor!
         lecturer.setAddress( record.get( currentColumn++ ) );
